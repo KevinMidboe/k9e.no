@@ -13,7 +13,7 @@
 </script>
 
 <section>
-	<div class="personalia">
+	<div>
 		<h1>Kevin Midbøe</h1>
 
 		<ul>
@@ -43,22 +43,33 @@
 		}
 
 		> div {
-			width: 50%;
+			width: 50vw;
 		}
 
-		div.personalia {
+		ul {
+			margin: 1rem 0;
+			display: flex;
+			flex-direction: column;
+			padding-left: 0;
 			font-size: 1.5rem;
 
-			ul {
-				margin: 1rem 0;
-				display: flex;
-				flex-direction: column;
-				padding-left: 0;
+			li {
+				list-style: none;
+				margin: 0.8rem 1rem 0;
+			}
+		}
+	}
 
-				li {
-					list-style: none;
-					margin: 0.8rem 1rem 0;
-				}
+	@media (max-width: 500px) {
+		section {
+			flex-direction: column;
+
+			> div {
+				width: 100%;
+			}
+
+			h1 {
+				font-size: 13vw;
 			}
 		}
 	}
