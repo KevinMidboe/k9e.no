@@ -1,6 +1,6 @@
 interface IImage {
-	url: string;
+	name: string;
 	alt: string;
 }
 
-export type { IImage };
+export default IImage;
