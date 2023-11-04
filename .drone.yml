@@ -8,19 +8,19 @@ platform:
   arch: amd64
 
 steps:
-  - name: lint
+  - name: Lint project
     image: node:21-alpine3.17
     commands:
       - yarn
       - yarn lint
 
-  - name: build
+  - name: Build app
     image: node:21-alpine3.17
     commands:
       - yarn
       - yarn build
 
-  - name: Build and publish docker image
+  - name: Publish docker image
     image: plugins/docker
     settings:
       registry: ghcr.io
@@ -39,3 +39,32 @@ steps:
           - pull_request
       branch:
         - main
+
+  - name: Deploy app to kubernetes
+    image: alpine/k8s:1.25.15
+    commands:
+      - kubectl config set-cluster $KUBE_CLUSTER --server=$KUBE_SERVER
+      - kubectl config set-credentials $KUBE_USER --token=$KUBE_TOKEN
+      - kubectl config set-context $KUBE_CONTEXT --cluster=$KUBE_CLUSTER --user=$KUBE_USER
+      - kubectl config use-context $KUBE_CONTEXT
+      - kubectl get pods
+    environment:
+      KUBE_CLUSTER:
+        from_secret: KUBE_CLUSTER
+      KUBE_USER:
+        from_secret: KUBE_USER
+      KUBE_SERVER:
+        from_secret: KUBE_SERVER
+      KUBE_TOKEN:
+        from_secret: KUBE_TOKEN
+      KUBE_CONTEXT:
+        from_secret: KUBE_CONTEXT
+    when:
+      event:
+        include:
+          - push
+        exclude:
+          - pull_request
+      branch:
+        - main
+        - kube
