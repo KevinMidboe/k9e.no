@@ -1,7 +1,7 @@
 ---
 kind: pipeline
 type: docker
-name: Build and publish
+name: Build
 
 platform:
   os: linux
@@ -40,25 +40,25 @@ steps:
       branch:
         - main
 
+---
+kind: pipeline
+type: docker
+name: Deploy
+
+platform:
+  os: linux
+  arch: amd64
+
+steps:
   - name: Deploy app to kubernetes
     image: alpine/k8s:1.25.15
     commands:
-      - kubectl config set-cluster $KUBE_CLUSTER --server=$KUBE_SERVER
-      - kubectl config set-credentials $KUBE_USER --token=$KUBE_TOKEN
-      - kubectl config set-context $KUBE_CONTEXT --cluster=$KUBE_CLUSTER --user=$KUBE_USER
-      - kubectl config use-context $KUBE_CONTEXT
-      - kubectl get pods
+      - mkdir -p /root/.kube
+      - echo $KUBE_CONFIG | base64 -di > /root/.kube/config
+      - kubectl --kubeconfig=/root/.kube/config get pods
     environment:
-      KUBE_CLUSTER:
-        from_secret: KUBE_CLUSTER
-      KUBE_USER:
-        from_secret: KUBE_USER
-      KUBE_SERVER:
-        from_secret: KUBE_SERVER
-      KUBE_TOKEN:
-        from_secret: KUBE_TOKEN
-      KUBE_CONTEXT:
-        from_secret: KUBE_CONTEXT
+      KUBE_CONFIG:
+        from_secret: KUBE_CONFIG
     when:
       event:
         include:
@@ -68,3 +68,6 @@ steps:
       branch:
         - main
         - kube
+
+depends_on:
+  - Build
