@@ -38,6 +38,7 @@
 		flex-direction: row;
 
 		h1 {
+			font-size: 5rem;
 			margin: 1rem 0;
 		}
 
