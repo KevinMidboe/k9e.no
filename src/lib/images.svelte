@@ -21,7 +21,7 @@
 	tabindex="0"
 >
 	{#each images as image (image.url)}
-		<img src={image.url} alt={image.alt} />
+		<img src="/images/{image.url}" alt={image.alt} />
 	{/each}
 </div>
 
