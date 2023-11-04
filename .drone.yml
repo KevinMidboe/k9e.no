@@ -55,7 +55,7 @@ steps:
     commands:
       - mkdir -p /root/.kube
       - echo $KUBE_CONFIG | base64 -di > /root/.kube/config
-      - kubectl --kubeconfig=/root/.kube/config get pods
+      - kubectl --kubeconfig=/root/.kube/config apply -f .kubernetes
     environment:
       KUBE_CONFIG:
         from_secret: KUBE_CONFIG
