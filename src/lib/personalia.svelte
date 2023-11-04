@@ -41,6 +41,11 @@
 		margin-top: 3rem;
 	}
 
+	p {
+		font-size: 1.4rem;
+		line-height: 1.6;
+	}
+
 	button {
 		width: 120px;
 		height: 30px;

@@ -3,4 +3,4 @@ interface IPersonalia {
 	text: string;
 }
 
-export type { IPersonalia };
+export default IPersonalia;
