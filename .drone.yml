@@ -1,26 +1,29 @@
 ---
 kind: pipeline
 type: docker
-name: Build and publish
+name: Build
 
 platform:
   os: linux
   arch: amd64
 
 steps:
-  - name: lint
+  - name: Install dependencies
     image: node:21-alpine3.17
     commands:
       - yarn
+
+  - name: Lint project
+    image: node:21-alpine3.17
+    commands:
       - yarn lint
 
-  - name: build
+  - name: Build
     image: node:21-alpine3.17
     commands:
-      - yarn
       - yarn build
 
-  - name: Build and publish docker image
+  - name: Publish to ghcr
     image: plugins/docker
     settings:
       registry: ghcr.io
@@ -39,3 +42,34 @@ steps:
           - pull_request
       branch:
         - main
+
+---
+kind: pipeline
+type: docker
+name: Deploy
+
+platform:
+  os: linux
+  arch: amd64
+
+steps:
+  - name: Deploy to kubernetes
+    image: alpine/k8s:1.25.15
+    commands:
+      - mkdir -p /root/.kube
+      - echo $KUBE_CONFIG | base64 -di > /root/.kube/config
+      - kubectl --kubeconfig=/root/.kube/config apply -f .kubernetes
+    environment:
+      KUBE_CONFIG:
+        from_secret: KUBE_CONFIG
+    when:
+      event:
+        include:
+          - push
+        exclude:
+          - pull_request
+      branch:
+        - main
+
+depends_on:
+  - Build
