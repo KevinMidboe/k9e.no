@@ -1,3 +1,4 @@
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -26,7 +27,7 @@ spec:
         app: k9e
     spec:
       containers:
-        - image: ghcr.io/kevinmidboe/k9e.no:latest
+        - image: ${IMAGE}
           imagePullPolicy: IfNotPresent
           name: k9e
           resources: {}

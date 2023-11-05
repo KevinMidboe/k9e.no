@@ -33,7 +33,9 @@ steps:
         from_secret: GITHUB_USERNAME
       password:
         from_secret: GITHUB_PASSWORD
-      tags: latest
+      tags:
+        - latest
+        - ${DRONE_COMMIT_SHA}
     when:
       event:
         include:
@@ -58,7 +60,10 @@ steps:
     commands:
       - mkdir -p /root/.kube
       - echo $KUBE_CONFIG | base64 -di > /root/.kube/config
-      - kubectl --kubeconfig=/root/.kube/config apply -f .kubernetes
+      - export IMAGE=ghcr.io/kevinmidboe/k9e.no:${DRONE_COMMIT_SHA}
+      - cat .kubernetes/*.yml
+        | envsubst -
+        | kubectl --kubeconfig=/root/.kube/config apply -f -
     environment:
       KUBE_CONFIG:
         from_secret: KUBE_CONFIG
@@ -73,3 +78,6 @@ steps:
 
 depends_on:
   - Build
+---
+kind: signature
+hmac: 996f43df0a29df7c3669a4f7c45e1514a205e0d7d15ebff6a59fc987947a3080
