@@ -44,7 +44,6 @@ steps:
           - pull_request
       branch:
         - main
-        - kube
 
 ---
 kind: pipeline
@@ -76,7 +75,9 @@ steps:
           - pull_request
       branch:
         - main
-        - kube
 
 depends_on:
   - Build
+---
+kind: signature
+hmac: 996f43df0a29df7c3669a4f7c45e1514a205e0d7d15ebff6a59fc987947a3080
