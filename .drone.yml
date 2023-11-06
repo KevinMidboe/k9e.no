@@ -44,6 +44,7 @@ steps:
           - pull_request
       branch:
         - main
+        - kube
 
 ---
 kind: pipeline
@@ -62,7 +63,7 @@ steps:
       - echo $KUBE_CONFIG | base64 -di > /root/.kube/config
       - export IMAGE=ghcr.io/kevinmidboe/k9e.no:${DRONE_COMMIT_SHA}
       - cat .kubernetes/*.yml
-        | envsubst -
+        | envsubst
         | kubectl --kubeconfig=/root/.kube/config apply -f -
     environment:
       KUBE_CONFIG:
@@ -75,6 +76,7 @@ steps:
           - pull_request
       branch:
         - main
+        - kube
 
 depends_on:
   - Build
