@@ -62,7 +62,7 @@ steps:
       - echo $KUBE_CONFIG | base64 -di > /root/.kube/config
       - export IMAGE=ghcr.io/kevinmidboe/k9e.no:${DRONE_COMMIT_SHA}
       - cat .kubernetes/*.yml
-        | envsubst -
+        | envsubst
         | kubectl --kubeconfig=/root/.kube/config apply -f -
     environment:
       KUBE_CONFIG:
@@ -80,4 +80,6 @@ depends_on:
   - Build
 ---
 kind: signature
-hmac: 996f43df0a29df7c3669a4f7c45e1514a205e0d7d15ebff6a59fc987947a3080
+hmac: 21637711852b1b5a29ae8fb084cc536daa06f6223a6c3d8a622fdbd2b2df527b
+
+...
