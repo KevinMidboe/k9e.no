@@ -44,6 +44,7 @@ steps:
           - pull_request
       branch:
         - main
+        - feat/ingress
 
 ---
 kind: pipeline
@@ -75,11 +76,12 @@ steps:
           - pull_request
       branch:
         - main
+        - feat/ingress
 
 depends_on:
   - Build
 ---
 kind: signature
-hmac: 21637711852b1b5a29ae8fb084cc536daa06f6223a6c3d8a622fdbd2b2df527b
+hmac: 1d062e2faf0fcc8b1e6140c76d54d7305cd0fea7c7f35cc070f05aaaa5cf0f3e
 
 ...

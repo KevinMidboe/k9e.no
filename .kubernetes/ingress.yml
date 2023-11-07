@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: k9e-ingress
+  namespace: k9e
+spec:
+  rules:
+    - host: k9e.kazan.schleppe
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: k9e-service
+                port:
+                  number: 80
