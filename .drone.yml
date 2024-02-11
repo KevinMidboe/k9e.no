@@ -55,6 +55,10 @@ trigger:
       - pull_request
   branch:
     - main
+    - ci/vault-variables
+
+depends_on:
+  - Build
 
 ---
 kind: pipeline
@@ -110,8 +114,10 @@ trigger:
       - pull_request
   branch:
     - main
+    - ci/vault-variables
 
 depends_on:
+  - Build
   - Publish
 
 volumes:
