@@ -22,7 +22,7 @@
 >
 	{#each images as image (image.name)}
 		<picture>
-			<source media="(max-width: 420px)" srcset="/images/{image.name}-300w.jpeg" />
+			<source media="(max-width: 620px)" srcset="/images/{image.name}-450w.jpeg" />
 			<source media="(max-width: 1800px)" srcset="/images/{image.name}-620w.jpeg" />
 			<source media="(min-width: 1801px)" srcset="/images/{image.name}-900w.jpeg" />
 			<img src="/images/{image.name}-300w.jpeg" alt={image.alt} />
