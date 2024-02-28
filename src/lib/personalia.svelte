@@ -27,11 +27,6 @@
 
 {#if bioSelected === 'long'}
 	<p>
-		I currently work at Aller Media as DevOps Lead. I enjoy building things with my hands and head,
-		bouldering and teaching in my free time.
-	</p>
-
-	<p>
 		Since I child I have been interested in building together with people, either from scrap wood, a
 		soldering iron or application of code. My 50 m2 apartment acts both as my workshop and my
 		playground where anything that can have ethernet has it, has a microcontroller attached to it, a
@@ -57,9 +52,8 @@
 
 	p {
 		font-size: 1.4rem;
-		line-height: 1.6;
-		white-space: pre-line;
-
+		line-height: 1.7;
+		margin: 2.5rem 0;
 		max-width: 800px;
 	}
 

@@ -36,7 +36,7 @@
 		display: flex;
 		user-select: none;
 		-webkit-user-select: none;
-		margin-left: 40px;
+		margin-left: 65px;
 
 		picture {
 			position: absolute;
@@ -50,8 +50,8 @@
 
 		@for $i from 0 through 4 {
 			picture:nth-of-type(#{$i}) {
-				left: calc(-10px * $i);
-				top: calc(-10px * $i);
+				left: calc(-12px * $i);
+				top: calc(-12px * $i);
 			}
 		}
 	}
