@@ -69,6 +69,7 @@
 		background-color: white;
 		overflow: auto;
 		transition: 0.2s ease all;
+		color: black !important;
 
 		&:not(&:last-of-type) {
 			margin-right: 1rem;
@@ -76,12 +77,13 @@
 
 		&.selected {
 			font-weight: bold;
-			border-color: var(--selected-color);
-			color: var(--selected-color);
+			border-color: var(--selected-color) !important;
+			background-color: var(--selected-color) !important;
 		}
 
 		&:hover {
-			background: rgba(150, 151, 156, 0.1);
+			background-color: rgba(150, 151, 156, 0.1);
+			color: gray;
 			cursor: pointer;
 		}
 	}

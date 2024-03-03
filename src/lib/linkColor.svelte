@@ -8,7 +8,8 @@
 
 	function setRandomLinkColor() {
 		Array.from(document.getElementsByTagName('a')).forEach((e) => {
-			e.style.color = getRandomColor();
+			e.classList.add('rainbow-text');
+			e.style.backgroundColor = getRandomColor();
 		});
 	}
 
@@ -23,3 +24,10 @@
 		setColorHoverListener();
 	});
 </script>
+
+<style lang="scss">
+	:global(.rainbow-text) {
+		padding: 0.2rem;
+		color: black;
+	}
+</style>
