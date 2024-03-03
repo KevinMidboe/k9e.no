@@ -1,0 +1,19 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: k9e-ingress
+  namespace: k9e
+spec:
+  ingressClassName: traefik
+  rules:
+    - host: k9e.kazan.schleppe.cloud
+      http:
+        paths:
+          - backend:
+              service:
+                name: k9e-service
+                port:
+                  number: 80
+            path: /
+            pathType: Prefix
