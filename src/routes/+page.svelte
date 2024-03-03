@@ -5,6 +5,7 @@
 	import type ILink from '$lib/interfaces/ILink';
 
 	const links: ILink[] = [
+		{ title: 'mail', url: 'mailto:kevin.midboe@gmail.com' },
 		{ title: 'github', url: 'https://github.com/kevinmidboe' },
 		{ title: 'blog', url: 'https://blog.schleppe.cloud' },
 		{ title: 'CV', url: 'https://no.linkedin.com/in/kevin-midbøe-687837161' },
